@@ -1,0 +1,25 @@
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% load static %}
+<div class="col-4 col-6-medium col-12-small">
+    <section class="box">
+        <div class="">
+            {% if self.imagex %}
+            <p>Image URL: {{ self.imagex.url  }}</p>
+                <a href="{{ self.link|default:'#' }}" class="image featured">
+                    <img src= "{{ self.imagex.data }}" alt="{{ self.title }}">
+                </a>
+            {% else %}
+                <p>No image available</p>  <!-- Optional message for missing image -->
+            {% endif %}
+        </div>
+        <header>
+            <h3>{{ self.title }}</h3>
+        </header>
+        <ul>
+            {% for line in self.description.splitlines %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
