@@ -323,7 +323,9 @@
                                             </ul>
                                         </section>
                                     </div>
-
+                                    {% for card in page.cards2 %}
+                                        {% include_block card %}
+                                    {% endfor %}
                                 </div>
                             </section>
 
@@ -399,7 +401,9 @@
                                             <p>Te brindamos un sistema de alarmas de última generación monitoreadas las 24 horas, los 365 días del año. Cuidando lo que mas quieres en tu hogar, comercio o industria,</p>
                                         </section>
                                     </div>
-                                    
+                                    {% for card in page.cards3 %}
+                                        {% include_block card %}
+                                    {% endfor %}
                                 </div>
                             </section>
 
