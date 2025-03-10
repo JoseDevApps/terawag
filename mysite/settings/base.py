@@ -15,7 +15,7 @@ import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*",'https://teravolt.com.bo/']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
