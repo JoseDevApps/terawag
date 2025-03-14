@@ -5,7 +5,7 @@
 
 /* Colors */
 :root {
-    --color-primary: #007BFF;
+    --color-primary: #003366;
     --color-primary-light: #93B5FF;
     --color-primary-dark: #333333;
 
@@ -48,10 +48,15 @@ section, summary, time, mark, audio, video {
 		color: var(--color-primary-dark);
 	}
 	
-	h1, h2, h3, h4, h5, h6 {
+	h1, h2, h3, h4 {
 		font-family: var(--font-header);
 		font-weight: var(--heading-font-weight);
 		color: var(--color-primary);
+	}
+	h5, h6 {
+		font-family: var(--font-header);
+		font-weight: var(--heading-font-weight);
+		color: var(--color-tertiary-light);
 	}
 	p {
 		font-family: var(--font-body);
@@ -122,8 +127,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #252122;
-		background-image: url("images/bg02.png");
+		background: #ffffff;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -213,6 +217,47 @@ input, select, textarea {
 	p, ul, ol, dl, table {
 		margin-bottom: 2em;
 	}
+/* Asegúrate de que el contenedor de la imagen tiene una posición relativa */
+/* Contenedor de la imagen del carrusel */
+.carousel-image-container {
+	position: relative;
+	width: 100%;
+	overflow: hidden; /* Asegura que no se desborde el contenido */
+	padding-top: 0;  /* Establecer padding-top a 0 */
+	margin-top: 0;  /* Asegurarse de que no haya margen adicional */
+  }
+  
+  /* Capa azul sobre la imagen */
+  .carousel-image-container .carousel-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 255, 0.4); /* Azul translúcido */
+	opacity: 50%;
+	z-index: 1; /* Asegura que la capa azul esté sobre la imagen */
+  }
+  
+  /* Asegura que el texto esté sobre la capa azul */
+  .carousel-caption {
+	position: absolute;
+	top: 50%; /* Coloca el texto en el centro vertical */
+	left: 50%; /* Coloca el texto en el centro horizontal */
+	transform: translate(-50%, -50%); /* Ajuste final para centrar exactamente */
+	color: #FF5733;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejorar la legibilidad */
+	z-index: 2; /* Asegura que el texto esté por encima de la capa de la imagen */
+	text-align: center; /* Asegura que el texto esté centrado dentro del contenedor */
+	font-size: 3rem; /* Aumenta el tamaño de la fuente */
+  }
+  /* Opcional: Eliminar padding del carrusel para asegurarse de que no haya espacio arriba o abajo */
+  .carousel {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+  }
+
+
 /* Responsive image */
 
 .responsive-image {
@@ -1592,7 +1637,7 @@ input, select, textarea {
 /* Section/Article */
 
 	section, article {
-		margin-bottom: 2.5em;
+		margin-bottom: 0;
 	}
 
 		section > :last-child, section:last-child, article > :last-child, article:last-child {
@@ -1615,7 +1660,7 @@ input, select, textarea {
 			position: relative;
 			text-align: center;
 			border-top: solid 1px #ccc;
-			top: 1em;
+			top: 0em;
 			margin: 0 0 3em 0;
 		}
 
@@ -2133,9 +2178,9 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		background: #ffffff;
+		background: #002b4e;
 		border-bottom: solid 1px #ccc;
-		padding: 5em 0 4em 0;
+		padding: 0;
 		text-align: center;
 	}
 
@@ -2253,7 +2298,7 @@ input, select, textarea {
 		#banner header {
 			background-color: var(--color-primary-dark);
 			display: inline-block;
-			padding: 2.5em 5em;
+			padding: 0;
 			border-radius: 5px;
 		}
 
@@ -2333,7 +2378,7 @@ input, select, textarea {
 
 	#main {
 		position: relative;
-		background: #f7f7f7 url("images/bg02.png");
+		background: #ffffff;
 		padding: 4em 0 4em 0;
 	}
 
@@ -2343,14 +2388,13 @@ input, select, textarea {
 			top: 0;
 			left: 0;
 			width: 100%;
-			background: url("images/bg01.png");
 			background-size: 100% 100%;
 			z-index: 0;
 			opacity: 0.1;
 		}
 
 		#main .major h2 {
-			background: #f7f7f7 url("images/bg02.png");
+			background: #ffffff ;
 		}
 
 /* Footer */
@@ -2358,6 +2402,7 @@ input, select, textarea {
 	#footer {
 		position: relative;
 		color: #858484;
+		background-color: #002b4e;
 		padding: 4em 0;
 	}
 
@@ -2367,7 +2412,6 @@ input, select, textarea {
 			top: 0;
 			left: 0;
 			width: 100%;
-			background: url("images/bg01.png");
 			background-size: 100% 100%;
 			z-index: 0;
 			opacity: 0.5;
@@ -2441,7 +2485,7 @@ input, select, textarea {
 		/* Section/Article */
 
 			header.major {
-				margin: 0.75em 0 2.5em 0;
+				margin: 0;
 			}
 
 				header.major h2 {
@@ -2457,7 +2501,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				padding: 4em 0 3em 0;
+				padding:0;
 			}
 
 		/* Banner */
@@ -2549,7 +2593,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				padding: 3.5em 0 3em 0;
+				padding: 0;
 			}
 
 		/* Nav */
@@ -2698,7 +2742,6 @@ input, select, textarea {
 				width: 275px;
 				z-index: 10002;
 				color: #858484;
-				background-image: url("images/bg02.png");
 				box-shadow: inset -3px 0px 5px 0px rgba(0, 0, 0, 0.35);
 			}
 
@@ -2809,6 +2852,11 @@ input, select, textarea {
 					margin-top: 0;
 				}
 
+
+				.carousel-caption {
+					font-size: 1.2rem; /* Adjust the font size for smaller screens */
+					padding: 10px; /* Add padding if needed */
+				}
 		/* Section/Article */
 
 			section, article {
@@ -2912,7 +2960,7 @@ input, select, textarea {
 
 			#header {
 				text-align: center;
-				padding: 2em 0;
+				padding: 0 0;
 			}
 
 				#header h1 {

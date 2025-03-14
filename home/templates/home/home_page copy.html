@@ -1,0 +1,619 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}homepage is-preload{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'page/assets/css/main.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+        <section id="header ">
+            <!-- Logo -->
+             <div class="background-logo" style="background-color:{{ page.background_color }};">
+                <div class="bd-example">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                      
+                      <!-- Indicadores dinámicos -->
+                      <ol class="carousel-indicators">
+                        {% for item in page.carousel_images.all %}
+                          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" 
+                              class="{% if forloop.first %}active{% endif %}">
+                          </li>
+                        {% endfor %}
+                      </ol>
+                  
+                      <!-- Contenido del Carrusel -->
+                      <div class="carousel-inner">
+                        {% for item in page.carousel_images.all %}
+                          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="carousel-image-container">
+                              <!-- Imagen con la capa de máscara -->
+                              {% image item.image fill-1200x600 class="d-block w-100" %}
+                              <div class="carousel-overlay"></div> <!-- Capa azul sobre la imagen -->
+                            </div>
+                  
+                            {% if item.caption %}
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ item.caption }}</h5>
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                      </div>
+                  
+                      <!-- Controles de navegación -->
+                      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  
+
+             </div>
+
+            <!-- Intro -->
+                <section id="intro" class="container">
+                    
+                 
+
+
+                    <div class="row ">
+                        <div class="col-4 col-12-medium">
+                            <section class="first">
+                                {% if page.image1 %}
+                                {% image page.image1 fill-640x368 class="responsive-image scroll-image" data-target="#ELECTROMECANICA" %}
+                                {% else %}
+                                    <img src="{% static 'page/images/fig2.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#ELECTROMECANICA">
+                                {% endif %} 
+                                <br>
+                                <header>
+                                    <h2>ELECTROMECÁNICA</h2>
+                                </header>
+                                <p>Diseño, instalación, mantenimiento y automatización de sistemas electromecánicos, eléctricos, de iluminación, puesta a tierra, pararrayos, UPS, tableros eléctricos, centros de transformación y grupos electrógenos.</p>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="middle">
+                                {% if page.image2 %}
+                                {% image page.image2 fill-640x368 class="responsive-image scroll-image" data-target="#Mantenimiento" %}
+                                {% else %}
+                                    <img src="{% static 'page/images/fig22.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#Mantenimiento">
+                                {% endif %} 
+
+                                <br>
+                                <header>
+                                    <h2>MANTENIMIENTO INDUSTRIAL</h2>
+                                </header>
+                                <p>Soluciones en puesta a tierra, instalación y mantenimiento eléctrico, automatización industrial y cableado estructurado con estándares internacionales.</p>
+                            </section>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <section class="last">
+                                {% if page.image3 %}
+                                {% image page.image3 fill-640x368 class="responsive-image scroll-image" data-target="#seguridad" %}
+                                {% else %}
+                                    <img src="{% static 'page/images/fig3.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#seguridad">
+                                {% endif %} 
+                                <br>
+                                <header>
+                                    <h2>SISTEMAS DE SEGURIDAD</h2>
+                                </header>
+                                <p>Soluciones integrales en seguridad electrónica con instalación de alarmas, videovigilancia, control de accesos y protección perimetral para hogares, comercios e industrias.</p>
+                            </section>
+                        </div>
+                    </div>
+
+                </section>
+
+        </section>
+
+    <!-- Main -->
+        <section id="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Portfolio -->
+                            <section id="ELECTROMECANICA">
+                                <header class="major">
+                                    <h2>ELECTROMECÁNICA</h2>
+                                </header>
+                                <div class="row">
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <div class="">
+                                                <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            </div>
+                                            <header>
+                                                <h3>DISEÑO Y MONTAJE DE SISTEMAS ELECTROMECÁNICOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Diseño y montaje de sistemas electromecánicos industriales</li>
+                                                <li>Diseño y ejecución de instalaciones eléctricas en edificios y centros comerciales</li>
+                                                <li>Diseño y ejecución de instalaciones eléctricas en hospitales y centros de salud</li>
+                                                <li>Mantenimiento de sistemas electromecánicos y paradas de planta programadas</li>
+                                                <li>Auditorías y relevamiento de sistemas eléctricos</li>
+                                                <li>Provisión e instalación de circuitos de tomacorrientes para piso técnico certificados</li>
+                                                <li>Instalación de sistemas de bandejas portacables en centros de datos</li>
+                                                <li>Instalación de sistemas de canalización CONDUIT y EMT</li>
+                                            </ul>
+                                            
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>SISTEMAS DE PUESTA A TIERRA</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Estudios de resistividad del terreno</li>
+                                                <li>Medición y certificación de sistemas de puesta a tierra con equipos certificados</li>
+                                                <li>Dimensionamiento de sistemas de puesta a tierra</li>
+                                                <li>Mejoramiento de sistemas de puesta a tierra</li>
+                                                <li>Mantenimiento de mallas de puesta a tierra</li>
+                                                <li>Instalación de sistemas de puesta a tierra para sistemas eléctricos</li>
+                                                <li>Tratamiento químico en pozos de puesta a tierra</li>
+                                                <li>Instalación de jabalinas con cemento conductivo</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>INSTALACIÓN Y MANTENIMIENTO DE UPS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Provisión e instalación de UPS monofásicos y trifásicos</li>
+                                                <li>Mantenimiento de UPS</li>
+                                                <li>Pruebas en bancos de baterías</li>
+                                                <li>Diseño y armado de tablero de By Pass</li>
+                                                <li>Sistemas de UPS en paralelo para centros de datos</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>SISTEMA DE PARARRAYOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Provisión e instalación de sistema de pararrayos</li>
+                                                <li>Dimensionamiento de cobertura para sistema de pararrayos.</li>
+                                                <li>Dimensionamiento del conductor bajante.</li>
+                                                <li>Dimensionamiento del sistema de puesta a tierra.</li>
+                                                <li>Provisión y montaje de contador de rayos.</li>
+                                                <li>Estructuras galvanizadas para soporte pararrayos.</li>
+                                                <li>Provisión e instalación de vía de chispas.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>PROVISIÓN Y ARMADO DE TABLEROS ELÉCTRICOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Fabricación de tableros eléctricos especiales y su mantenimiento.</li>
+                                                <li>Diseño y armado de tableros eléctricos de fuerza y control.</li>
+                                                <li>Tableros eléctricos para instalación exterior y edificios.</li>
+                                                <li>Diseño y armado de tableros para aires acondicionados y compresores redundantes.</li>
+                                                <li>Diseño y armado de tableros eléctricos para distribución y automatización de procesos.</li>
+                                                <li>Protección contra transitorios de voltaje y arranque de motores.</li>
+                                                <li>Servicio de plegado de barras de cobre con maquinaria certificada.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>CENTROS DE TRANSFORMACIÓN DE ENERGÍA</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Provisión e instalación de transformadores de distribución.</li>
+                                                <li>Provisión e instalación de transformadores secos.</li>
+                                                <li>Provisión e instalación de transformadores de potencia PTs.</li>
+                                                <li>Provisión e instalación de transformadores de corriente CTs.</li>
+                                                <li>Provisión e instalación de celdas de media tensión.</li>
+                                                <li>Provisión e instalación de reconectador en media tensión.</li>
+                                                <li>Diseño y montaje de redes de media tensión y baja tensión.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>GRUPOS ELECTRÓGENOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Provisión, dimensionamiento e instalación de grupos electrógenos y componentes asociados.</li>
+                                                <li>Instalación y puesta en marcha de grupos electrógenos y sistemas de control.</li>
+                                                <li>Mantenimiento de grupos electrógenos y equipos eléctricos.</li>
+                                                <li>Diseño y armado de tableros eléctricos de emergencia y para grupos generadores.</li>
+                                                <li>Construcción y montaje de tablero de transferencia ATS y sincronización.</li>
+                                                <li>Automatización de grupos electrógenos, tanques externos y controladores electrónicos.</li>
+                                                <li>Provisión e instalación de silenciadores, caños de escape, calentadores y cargadores de batería.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E1.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>DISEÑO E INSTALACIÓN DE SISTEMAS DE ILUMINACIÓN</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Cálculo luminotécnico.</li>
+                                                <li>Instalación de sistemas de iluminación en interior y exterior.</li>
+                                                <li>Automatización de sistemas eléctricos de iluminación.</li>
+                                                <li>Provisión de tableros de control de iluminación manual – automático.</li>
+                                                <li>Diseño e instalación de sistemas de iluminación LED.</li>
+                                                <li>Provisión e instalación de drivers de dimerización.</li>
+                                                <li>Provisión e instalación de dimmers con tecnología PWM, 1-10V, BLUETOOTH y WIRELESS.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    {% for card in page.cards %}
+                                        {% include_block card %}
+                                    {% endfor %}
+
+                                    
+                                </div>
+                            </section>
+
+                            <!-- Seccion 2 -->
+
+                            <section>
+                                <header class="major" id="Mantenimiento">
+                                    <h2>MANTENIMIENTO INDUSTRIAL</h2>
+                                </header>
+                                <div class="row">
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E3.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>ATERRAMIENTO</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Especialización en la implantación de Sistemas de Puesta a Tierra, especialmente en terrenos de alta resistividad (zonas rocosas, montañosas, etc.).</li>
+                                                <li>Desarrollo de la ingeniería y estudios previos, incluyendo mediciones de resistividad.</li>
+                                                <li>Implementación de soluciones específicas de sistemas de Puesta a Tierra de baja resistencia óhmica.</li>
+                                                <li>Soluciones basadas en la norma NB777.</li>
+                                                <li>Soluciones funcionales para todo tipo de instalaciones eléctricas, electrónicas y de telecomunicaciones.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E3.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>INSTALACIÓN Y MANTENIMIENTO DE SISTEMAS ELÉCTRICOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Instalación completa del sistema eléctrico con personal altamente capacitado y experimentado.</li>
+                                                <li>Experiencia en todos los aspectos: eléctricos, electrónicos, mecánicos, sistemas, software, hardware, seguridad, certificación y calidad.</li>
+                                                <li>Servicios de mantenimiento adaptados a las necesidades del cliente.</li>
+                                                <li>Reducción de costes ante contingencias de fallo eléctrico.</li>
+                                                <li>Cumplimiento de la normativa actual sobre instalaciones eléctricas.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E3.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>AUTOMATIZACIÓN</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Comisionado y puesta en servicio de sistemas automáticos.</li>
+                                                <li>Ingeniería de diseño.</li>
+                                                <li>Montaje de equipos.</li>
+                                                <li>Montaje y diseño de tableros de control.</li>
+                                                <li>Prueba de lazos de proceso.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/E3.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>CABLEADO ESTRUCTURADO</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Instalación de cableado estructurado para garantizar comunicaciones y conectividad en empresas.</li>
+                                                <li>Implementaciones con alta tasa de transferencia de datos usando par de cobre y fibra óptica para LAN y WAN.</li>
+                                                <li>Soluciones que integran voz, datos y video en un mismo canal de comunicación.</li>
+                                                <li>Cumplimiento de normativas y buenas prácticas de instalación según TIA, ANSI, EIA, ISO y IEEE.</li>
+                                                <li>Instalación de cableado horizontal y vertical.</li>
+                                                <li>Instalación de acometidas de cableado estructurado, canalizaciones, fibra óptica, cobre, y organizadores.</li>
+                                                <li>Instalación de racks, gabinetes, patch cords, jacks RJ45, patch paneles y cables FTP/UTP (Cat 7A, Cat 6A, Cat 6).</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    {% for card in page.cards2 %}
+                                        {% include_block card %}
+                                    {% endfor %}
+                                </div>
+                            </section>
+
+                            <!-- Seccion 3 -->
+
+                            <section>
+                                <header class="major" id="seguridad">
+                                    <h2>SISTEMAS DE SEGURIDAD</h2>
+                                </header>
+                                <div class="row">
+                                    
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/Seg.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>INSTALACIÓN DE CÁMARAS DE SEGURIDAD</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Prevención, disuasión y control mediante sistemas de videovigilancia.</li>
+                                                <li>Supervisión e integración de eventos o avisos de forma automática y en tiempo real.</li>
+                                                <li>Disuasión efectiva ante la presencia de cámaras de seguridad.</li>
+                                                <li>Verificación visual para responder ante situaciones de riesgo.</li>
+                                                <li>Acceso remoto a imágenes desde cualquier lugar y en cualquier momento.</li>
+                                                <li>Implementación de inteligencia artificial para detección temprana de comportamientos.</li>
+                                                <li>Supervisión de procesos, efectividad y cumplimiento de procedimientos.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/Seg.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>INSTALACIÓN DE CONTROL DE ACCESOS</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Soluciones de control de acceso aplicables a cualquier entorno y adaptadas a las necesidades del usuario.</li>
+                                                <li>Registro y autorización de circulación en áreas restringidas.</li>
+                                                <li>Acceso a información en tiempo real para una mejor toma de decisiones.</li>
+                                                <li>Optimización de la gestión de seguridad y control de accesos.</li>
+                                                <li>Monitoreo y documentación de incidentes para análisis y prevención.</li>
+                                                <li>Protección proactiva de personas y activos.</li>
+                                                <li>Prevención de riesgos que afecten la continuidad del negocio.</li>
+                                            </ul>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/Seg.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>PROTECCIÓN PERIMETRAL</h3>
+                                            </header>
+                                            <ul>
+                                                <li>Soluciones tecnológicas de protección perimetral adaptadas a entornos exteriores.</li>
+                                                <li>Uso de detectores de intrusión, análisis de video y cámaras térmicas para mayor seguridad.</li>
+                                                <li>Integración de múltiples sistemas de protección para una defensa eficiente.</li>
+                                                <li>Monitoreo y resguardo de perímetros en instalaciones comerciales e industriales.</li>
+                                                <li>Soporte y asistencia técnica para garantizar la operatividad de los sistemas de seguridad.</li>
+                                                <li>Implementación de sistemas de videovigilancia, control de accesos y detección de intrusiones.</li>
+                                                <li>Optimización de procedimientos para mantener la eficacia de la seguridad electrónica.</li>
+                                            </ul>
+                                            
+                                        </section>
+                                    </div>
+                                    <div class="col-4 col-6-medium col-12-small">
+                                        <section class="box">
+                                            <a href="#" class="image featured"><img src="{% static 'page/images/Seg.jpg' %}" alt="" /></a>
+                                            <header>
+                                                <h3>INSTALACIÓN DE ALARMAS</h3>
+                                            </header>
+                                            <p>Te brindamos un sistema de alarmas de última generación monitoreadas las 24 horas, los 365 días del año. Cuidando lo que mas quieres en tu hogar, comercio o industria,</p>
+                                        </section>
+                                    </div>
+                                    {% for card in page.cards3 %}
+                                        {% include_block card %}
+                                    {% endfor %}
+                                </div>
+                            </section>
+
+                    </div>
+                    <div class="col-12">
+
+                        <!-- Blog -->
+                            <section>
+                                <header class="major">
+                                    <h2>Misión y Vision</h2>
+                                </header>
+                                <div class="row">
+                                    <div class="col-6 col-12-small">
+                                        <section class="box">
+                                            <header>
+                                                <h3>MISIÓN</h3>
+                                            </header>
+                                            <p>Somos una empresa especializada en el sector de Automatización y Mantenimiento Industrial, Proyectos de Diseño, Fabricación, Adecuación e Innovación Tecnológica, con capacitación y Asesoramiento Ingenieril, brindando soluciones integrales de Ingeniería Eléctrica, sistemas Mecánicos, Hidráulicos, Neumáticos, Seguridad Industrial, Higiene y Medio Ambiente, empleando equipos de calidad y aplicando normativas vigentes, con profesionalismo para brindar un excelente servicio a nuestros clientes.
+                                                <br><br>
+                                                Nuestra Misión en TERAVOLT S.R.L. es ser un aliado estratégico, basados en relaciones de largo plazo con nuestros clientes, brindando un servicio de mantenimiento industrial estableciendo una mejora continua esto con el uso de tecnología de punta logrando satisfacer sus necesidades, con personal altamente calificado brindando así un servicio responsable, protegiendo el medio ambiente y apoyando mejoras en la comunidad.
+                                            </p>
+                                            
+                                        </section>
+                                    </div>
+                                    <div class="col-6 col-12-small">
+                                        <section class="box">
+                                            <header>
+                                                <h3>VISIÓN</h3>
+                                            </header>
+                                            <p>Ser la primera opción para nuestros clientes que requieren el servicio de diseño e instalación de sistemas eléctricos en su industria brindando soluciones integrales en tecnología con calidad, eficiencia y garantía.
+                                                <br><br>
+
+                                                Nuestra Visión es ser una empresa competente y reconocida dentro del ámbito nacional para ubicarnos en el grupo selecto de empresas que brindan calidad de servicios en mantenimiento industrial apoyando así la capacidad y experiencia de profesionales bolivianos.
+                                                .</p>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    
+
+                    <div class="col-12 col-12-medium">
+                        <section  class="py-5">
+                            <header class="d-flex justify-content-center">
+                                <h2 class="text-start w-100">¿Quienes somos?</h2>
+                            </header>
+                            <p>
+                                Somos una empresa especializada en la instalación de sistemas eléctricos en el sector industrial edificaciones y estructuras de ingeniería civil, automatización industrial y domótica, diseño, fabricación e instalación de tableros eléctricos, instalación de sistemas de seguridad y electrónica, cableado estructurado e instalación de redes de datos, diseño e instalación de sistemas de puesta a tierra y pararrayos, instalación y mantenimiento de maquinaria industrial. Contamos con el personal calificado e idóneo para la ejecución de los servicios, empleando las normativas vigentes nacionales e internacionales.
+                            </p>
+                        </section>
+
+                        <section  class="py-5">
+                            <header class="d-flex justify-content-center">
+                                <h2 class="text-start w-100">OBJETIVOS</h2>
+                            </header>
+                            <ul>
+                                <li>Implementar la mejora continua para el desarrollo de nuevos servicios sin comprometer la calidad.</li>
+                                <li>Mantener la rentabilidad mientras se optimiza la prestación de servicios.</li>
+                                <li>Mejorar la eficacia en los procesos operativos y administrativos.</li>
+                                <li>Maximizar la rentabilidad a través de una gestión eficiente.</li>
+                            </ul>
+                            
+                        </section>
+                    </div>
+
+                    <div class="col-12 col-12-medium">
+                        <section>
+                            <header>
+                                <h2>Contactanos</h2>
+                            </header>
+                            <form method="post" action="#">
+                                <div class="fields">
+                                    <div class="field half">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" name="name" id="name" />
+                                    </div>
+                                    <br>
+                                    <div class="field half">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email" />
+                                    </div>
+                                    <br>
+                                    <div class="field">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" id="message" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <ul class="actions">
+                                    <li><a href="" class="button submit">Enviar Mensaje</a></li>
+                                </ul>
+                            </form>
+                        </section>
+                    </div>
+                    <div class="col-12 col-12-medium">
+                        <section>
+                            <header>
+                                <h2>Visitanos</h2>
+                            </header>
+                            <ul class="social">
+                                <li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
+                                <li><a class="icon brands fab fa-whatsapp" href="#"><span class="label">WhatsApp</span></a></li>
+                                <li><a class="icon brands fa-linkedin-in" href="#"><span class="label">LinkedIn</span></a></li>
+                            </ul>
+                            <ul class="contact">
+                                <li>
+                                    <h3>Dirección</h3>
+                                    <p>
+                                        (paiss)<br />
+                                        (Calle y numero)<br />
+                                        (ciudad)
+                                    </p>
+                                </li>
+                                <li>
+                                    <h3>Correo</h3>
+                                    <p><a href="#">someone@untitled.tld</a></p>
+                                </li>
+                                <li>
+                                    <h3>Celular</h3>
+                                    <p>(591) 000-0000</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-12">
+
+                        <!-- Copyright -->
+                            <div id="copyright">
+                                <ul class="links">
+                                    <li>&copy; All rights reserved TERAVOLT S.R.L.</li>
+                                </ul>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+</div>
+{% block extra_js %}
+            <script src="{% static 'page/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'page/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'page/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'page/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'page/assets/js/util.js' %}"></script>
+			<script src="{% static 'page/assets/js/main.js' %}"></script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+				const pageimages = document.querySelectorAll(".scroll-image");
+
+				pageimages.forEach(function (image) {
+					image.addEventListener("click", function () {
+					const targetSection = document.querySelector(image.getAttribute("data-target"));
+					if (targetSection) {
+						targetSection.scrollIntoView({ behavior: "smooth" });
+					} else {
+						console.error("Target section not found: " + image.getAttribute("data-target"));
+					}
+					});
+				});
+				});
+
+			</script>
+
+{% endblock extra_js %}
+
+{% endblock content %}

@@ -1,0 +1,7 @@
+/* Cambiar el fondo de la navbar */
+.navbar-brand img {
+    max-height: 50px;
+}
+.custom-bg {
+    background-color: #002B4E;  /* Azul claro */
+}
