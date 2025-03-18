@@ -260,6 +260,42 @@ input, select, textarea {
 	padding-bottom: 0 !important;
   }
 
+  #card-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    flex: 1 1 auto; /* Flexbox properties to allow expansion and contraction */
+    margin: 10px; /* Adds spacing between items */
+}
+
+/* Custom CSS for handling different card counts */
+#card-row {
+    justify-content: space-around; /* Center cards horizontally with equal space */
+}
+
+#card-row:only-child .card-item {
+    flex-basis: 100%; /* If only 1 item, it takes the full width */
+}
+
+#card-row:only-child {
+    justify-content: center;
+}
+
+#card-row:has(.card-item:nth-child(2)) {
+    flex-wrap: wrap; /* Allow wrapping for 2 items */
+}
+
+#card-row:has(.card-item:nth-child(3)) {
+    justify-content: center; /* Justify center for 3 cards */
+}
+
+#card-row:has(.card-item:nth-child(4)) {
+    justify-content: space-between; /* Space out cards for 4 items */
+}
+
 
 /* Responsive image */
 
