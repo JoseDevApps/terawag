@@ -42,7 +42,9 @@
                   
                             {% if item.caption %}
                               <div class="carousel-caption d-none d-md-block">
-                                <h5>{{ item.caption|richtext }}</h5>
+                                <div style="color: {{ item.font_color }}">
+                                    {{ item.caption|richtext }}
+                                </div>
                               </div>
                             {% endif %}
                           </div>

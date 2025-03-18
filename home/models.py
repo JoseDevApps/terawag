@@ -10,6 +10,9 @@ from wagtail.images.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey
 from django import forms
 from django.core.mail import send_mail
+import re
+from django.utils.html import escape
+
 
 # 📌 Modelo para el Carrusel
 class CarouselImage(models.Model):
@@ -23,14 +26,26 @@ class CarouselImage(models.Model):
     caption = RichTextField(features=[
     'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
     'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
-    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color',"font_color",
     ], blank=True, null=True)
-
+    font_color = models.CharField(max_length=7, default="#000000")  # Default black
     panels = [
         FieldPanel("image"),
         FieldPanel("caption"),
+        NativeColorPanel("font_color"),
     ]
 
+    def save(self, *args, **kwargs):
+        # Modify the rich text content to inject the font_color
+        if self.font_color:
+            caption_html = self.caption
+            # Inject the color as an inline style to all paragraphs, spans, or inline text
+            caption_html = re.sub(r'(<p[^>]*>|<span[^>]*>|<div[^>]*>)', 
+                                  r'\1<span style="color: ' + escape(self.font_color) + ';">', caption_html)
+            caption_html = re.sub(r'(</p>|</span>|</div>)', r'</span>\1', caption_html)
+            self.caption = caption_html
+
+        super().save(*args, **kwargs)
     class Meta:
         verbose_name = "Imagen del Carrusel"
         verbose_name_plural = "Imágenes del Carrusel"
