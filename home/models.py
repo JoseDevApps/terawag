@@ -4,8 +4,8 @@ from wagtail.models import Page
 from wagtail.images.models import Image
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail_color_panel.edit_handlers import NativeColorPanel
-from wagtail.fields import StreamField
-from wagtail.blocks import StructBlock, CharBlock, TextBlock, URLBlock
+from wagtail.fields import RichTextField, StreamField
+from wagtail.blocks import StructBlock, CharBlock, TextBlock, URLBlock, RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey
 from django import forms
@@ -20,7 +20,11 @@ class CarouselImage(models.Model):
         on_delete=models.CASCADE,
         related_name="+"
     )
-    caption = models.CharField(max_length=255, blank=True, null=True)
+    caption = RichTextField(features=[
+    'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
+    'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    ], blank=True, null=True)
 
     panels = [
         FieldPanel("image"),
@@ -51,8 +55,12 @@ class ContactForm(forms.Form):
 class CardBlock(StructBlock):
     """A reusable card block with image, title, description, and link."""
     imagex = ImageChooserBlock(required=False)
-    title = CharBlock(required=True, max_length=100)
-    description = TextBlock(required=True)
+    title = RichTextBlock(features=['bold', 'italic', 'underline'], required=True)
+    description = RichTextBlock(features=[
+    'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
+    'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    ], required=True)
 
     class Meta:
         template = "home/card_block.html"  # Create this template later
@@ -62,8 +70,12 @@ class CardBlock(StructBlock):
 class CardBlock2(StructBlock):
     """A reusable card block with image, title, description, and link."""
     imagex = ImageChooserBlock(required=False)
-    title = CharBlock(required=True, max_length=100)
-    description = TextBlock(required=True)
+    title = RichTextBlock(features=['bold', 'italic', 'underline'], required=True)
+    description = RichTextBlock(features=[
+    'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
+    'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    ], required=True)
 
     class Meta:
         template = "home/card_block2.html"  # Create this template later
@@ -73,8 +85,12 @@ class CardBlock2(StructBlock):
 class CardBlock3(StructBlock):
     """A reusable card block with image, title, description, and link."""
     imagex = ImageChooserBlock(required=False)
-    title = CharBlock(required=True, max_length=100)
-    description = TextBlock(required=True)
+    title = RichTextBlock(features=['bold', 'italic', 'underline'], required=True)
+    description = RichTextBlock(features=[
+    'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
+    'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    ], required=True)
 
     class Meta:
         template = "home/card_block3.html"  # Create this template later
@@ -112,8 +128,13 @@ class HomePage(Page):
         related_name='+'
     )
     background_color = models.CharField(max_length=7, default="#ffffff")
-    paragraph_text = models.TextField(
-        default="Calidad y experiencia en servicios",
+    paragraph_text = RichTextField(
+    default="Calidad y experiencia en servicios",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
         help_text="Edit this text from the Wagtail admin panel."
     )
 

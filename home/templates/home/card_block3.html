@@ -6,19 +6,15 @@
         <div class="">
             {% if self.imagex %}
                 <a href="{{ self.link|default:'#' }}" class="image featured">
-                    <img src= "{{ self.imagex.file.url }}" alt="{{ self.title }}">
+                    <img src= "{{ self.imagex.file.url }}" >
                 </a>
             {% else %}
                 <p>No image available</p>  <!-- Optional message for missing image -->
             {% endif %}
         </div>
         <header>
-            <h3>{{ self.title }}</h3>
+            <h3>{{ self.title|richtext }}</h3>
         </header>
-        <ul>
-            {% for line in self.description.splitlines %}
-                <li>{{ line }}</li>
-            {% endfor %}
-        </ul>
+        <p>{{ self.description|richtext  }}</p>
     </section>
 </div>
