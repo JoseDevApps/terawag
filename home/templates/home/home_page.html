@@ -124,8 +124,8 @@
                 <div class="bannerp" style="background-image: url({{ page.banner.file.url }}); ">
                     <div class="overlay2" style="background-color:{{ page.background_color_ban }}; "></div>
                     <div class="caption">
-                        {% if self.caption %}
-                            <h2>{{ page.heading }}</h2>  <!-- Editable caption -->
+                        {% if page.heading %}
+                            <h2>{{ page.heading|safe }}</h2>  <!-- Editable caption -->
                         {% else %}
                             <h2>Calidad y experiencia en servicios</h2>  <!-- Default caption if not set -->
                         {% endif %}
@@ -309,7 +309,7 @@
                             </header>
 
                             {% if page.pQS %}
-                                <p>{{ page.pQS }}</p>  <!-- Editable caption -->
+                                <p>{{ page.pQS|safe }}</p>  <!-- Editable caption -->
                             {% else %}
                             <p>
                                 Somos una empresa especializada en la instalación de sistemas eléctricos en el sector industrial edificaciones y estructuras de ingeniería civil, automatización industrial y domótica, diseño, fabricación e instalación de tableros eléctricos, instalación de sistemas de seguridad y electrónica, cableado estructurado e instalación de redes de datos, diseño e instalación de sistemas de puesta a tierra y pararrayos, instalación y mantenimiento de maquinaria industrial. Contamos con el personal calificado e idóneo para la ejecución de los servicios, empleando las normativas vigentes nacionales e internacionales.
@@ -324,7 +324,7 @@
                             </header>
 
                             {% if self.caption %}
-                                <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                {{ page.pOB|safe }}  <!-- Editable caption -->
                             {% else %}
                             <ul>
                                 <li>Implementar la mejora continua para el desarrollo de nuevos servicios sin comprometer la calidad.</li>
