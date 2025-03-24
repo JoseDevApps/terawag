@@ -264,6 +264,35 @@ input, select, textarea {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
   }
+/* Ajuste de tamaño para móviles */
+@media (max-width: 768px) {
+	.carousel-caption {
+		font-size: 2rem; /* Reduce el tamaño del texto en tablets */
+		width: 80%;
+	}
+
+	.carousel-image-container {
+		height: 300px; /* Ajusta la altura en móviles */
+	}
+
+	.carousel-image-container .carousel-overlay {
+		opacity: 0.6; /* Mejora la visibilidad en pantallas pequeñas */
+	}
+}
+
+@media (max-width: 480px) {
+	.carousel-caption {
+		font-size: 1.5rem; /* Reduce el tamaño del texto en móviles */
+		width: 90%;
+	}
+
+	.carousel-image-container {
+		height: 250px; /* Ajuste de altura en celulares */
+	}
+}
+
+
+
 
   #card-row {
     display: flex;
@@ -3088,6 +3117,7 @@ section#Mantenimiento > .row {
 				font-size: 1.25em;
 			}
 
+			
 		/* Button */
 
 			input[type="button"].large,
