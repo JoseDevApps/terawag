@@ -83,9 +83,9 @@
                                 {% endif %} 
                                 <br>
                                 <header>
-                                    <h2>ELECTROMECANICA</h2>
+                                    <h2>{{ page.seccion1|richtext }}</h2>
                                 </header>
-                                <p>Diseño, instalación, mantenimiento y automatización de sistemas electromecánicos, eléctricos, de iluminación, puesta a tierra, pararrayos, UPS, tableros eléctricos, centros de transformación y grupos electrógenos.</p>
+                                <p>{{ page.p1|richtext }}</p>
                             </section>
                         </div>
                         <div class="col-4 col-12-medium">
@@ -98,9 +98,9 @@
 
                                 <br>
                                 <header>
-                                    <h2>MANTENIMIENTO INDUSTRIAL</h2>
+                                    <h2>{{ page.seccion2|richtext }}</h2>
                                 </header>
-                                <p>Soluciones en puesta a tierra, instalación y mantenimiento eléctrico, automatización industrial y cableado estructurado con estándares internacionales.</p>
+                                <p>{{ page.p2|richtext }}</p>
                             </section>
                         </div>
                         <div class="col-4 col-12-medium">
@@ -112,14 +112,25 @@
                                 {% endif %} 
                                 <br>
                                 <header>
-                                    <h2>SISTEMAS DE SEGURIDAD</h2>
+                                    <h2>{{ page.seccion3|richtext }}</h2>
                                 </header>
-                                <p>Soluciones integrales en seguridad electrónica con instalación de alarmas, videovigilancia, control de accesos y protección perimetral para hogares, comercios e industrias.</p>
+                                <p>{{ page.p3|richtext }} </p>
                             </section>
                         </div>
                     </div>
 
                 </section>
+
+                <div class="bannerp" style="background-image: url({{ page.banner.file.url }}); ">
+                    <div class="overlay2" style="background-color:{{ page.background_color_ban }}; "></div>
+                    <div class="caption">
+                        {% if self.caption %}
+                            <h2>{{ page.heading }}</h2>  <!-- Editable caption -->
+                        {% else %}
+                            <h2>Calidad y experiencia en servicios</h2>  <!-- Default caption if not set -->
+                        {% endif %}
+                    </div>
+                </div>
 
         </section>
 
@@ -130,37 +141,86 @@
                     <div class="col-12">
 
                         <!-- Portfolio -->
-                            <section id="ELECTROMECANICA">
-                                <header class="major">
-                                    <h2>ELECTROMECÁNICA</h2>
-                                </header>
-                                <div class="row justify-content-center">
-                                    {% for card in page.cards %}
-                                        {% include_block card %}
-                                    {% endfor %}
+                        <section id="ELECTROMECANICA" 
+                        style="background-image: url({{ page.bannerS1.file.url }}); 
+                               width: 100vw; 
+                               position: relative; 
+                               transform: translateX(-50%); 
+                               left: 50%;">
+                            <!-- Background overlay -->
+                            <div class="overlay" style="background-color: {{ page.background_color_s1 }}; "></div>
+                            
+                            <div class="banner" style="background-image: url({{ page.backS1.file.url }});  ">
+                                <div class="overlay2" style="background-color: {{ page.background_color_b1 }}; "></div>
+                                <div class="caption">
+                                    {% if self.caption %}
+                                        <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                    {% else %}
+                                        <h2>ELECTROMECÁNICA</h2>  <!-- Default caption if not set -->
+                                    {% endif %}
                                 </div>
-                            </section>
+                            </div>
+                            {% with page.cards|length as num_cards %}
+                            <div class="row justify-content-center" style="padding-left: 4em; padding-right: 4em;">
+                                {% for card in page.cards %}
+                                    {% include_block card %}
+                                {% endfor %}
+                            </div>
+                            {% endwith %}
+                        </section>
 
                             <!-- Seccion 2 -->
 
-                            <section >
-                                <header class="major" id="Mantenimiento">
-                                    <h2>MANTENIMIENTO INDUSTRIAL</h2>
-                                </header>
-                                <div class="row justify-content-center">
+                            <section id="Mantenimiento" style="background-image: url({{ page.bannerS2.file.url }}); 
+                                        width: 100vw; 
+                                        position: relative; 
+                                        transform: translateX(-50%); 
+                                        left: 50%;">
+                                <div class="overlay" style="background-color: {{ page.background_color_s2 }}; "></div>
+
+                                <div class="banner" style="background-image: url({{ page.backS2.file.url }});  ">
+                                    <div class="overlay2" style="background-color: {{ page.background_color_b2 }}; "></div>
+                                    <div class="caption">
+                                        {% if self.caption %}
+                                            <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                        {% else %}
+                                            <h2>MANTENIMIENTO INDUSTRIAL</h2>  <!-- Default caption if not set -->
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            
+                            
+                                <div class="row justify-content-center" style="padding-left: 4em; padding-right: 4em;">
                                     {% for card in page.cards2 %}
                                         {% include_block card %}
                                     {% endfor %}
                                 </div>
+                                
                             </section>
 
                             <!-- Seccion 3 -->
 
-                            <section>
-                                <header class="major" id="seguridad">
-                                    <h2>SISTEMAS DE SEGURIDAD</h2>
-                                </header>
-                                <div class="row justify-content-cente">
+                            <section id="seguridad" style="background-image: url({{ page.bannerS3.file.url }}); 
+                                    width: 100vw; 
+                                    position: relative; 
+                                    transform: translateX(-50%); 
+                                    left: 50%;">
+                                <div class="overlay" style="background-color: {{ page.background_color_s3 }}; "></div>
+
+                                <div class="banner" style="background-image: url({{ page.backS3.file.url }}); ">
+                                    <div class="overlay2" style="background-color: {{ page.background_color_b3 }}; "></div>
+                                    <div class="caption">
+                                        {% if self.caption %}
+                                            <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                        {% else %}
+                                            <h2>SISTEMAS DE SEGURIDAD</h2>  <!-- Default caption if not set -->
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                             
+                                <div class="row justify-content-cente" style="padding-left: 4em; padding-right: 4em;">
                                    
                                     {% for card in page.cards3 %}
                                         {% include_block card %}
@@ -169,41 +229,68 @@
                             </section>
 
                     </div>
-                    <div class="col-12">
 
+                    <div class="col-12">
                         <!-- Blog -->
-                            <section>
-                                <header class="major">
-                                    <h2>Misión y Vision</h2>
-                                </header>
+                            <section style="background-image: url({{ page.bannerMV.file.url }});
+                            width: 100vw; 
+                            position: relative; 
+                            transform: translateX(-50%); 
+                            left: 50%;">
+                            <div class="overlay" style="background-color: #31866a; "></div>
+
+                        
+                            
                                 <div class="row">
+                                    <div class="banner" style="background-image: url({% static 'page/images/pic02.jpg' %}); ">
+                                        <div class="overlay2" style="background-color: #ffffff; "></div>
+                                        <div class="caption">
+                                            {% if self.caption %}
+                                                <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                            {% else %}
+                                                <h2>Misión y Visión</h2>  <!-- Default caption if not set -->
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
                                     <div class="col-6 col-12-small">
-                                        <section class="box">
-                                            <header>
+                                        <section class="box" style="background: transparent;">
+                                            <header style="z-index: 4; position: relative;">
                                                 <h3>MISIÓN</h3>
                                             </header>
-                                            <p>Somos una empresa especializada en el sector de Automatización y Mantenimiento Industrial, Proyectos de Diseño, Fabricación, Adecuación e Innovación Tecnológica, con capacitación y Asesoramiento Ingenieril, brindando soluciones integrales de Ingeniería Eléctrica, sistemas Mecánicos, Hidráulicos, Neumáticos, Seguridad Industrial, Higiene y Medio Ambiente, empleando equipos de calidad y aplicando normativas vigentes, con profesionalismo para brindar un excelente servicio a nuestros clientes.
+
+                                            {% if page.pMV1 %}
+                                                {{ page.pMV1|safe }}  <!-- Editable caption -->
+                                            {% else %}
+                                            <p style="z-index: 4; position: relative;">
+                                                Somos una empresa especializada en el sector de Automatización y Mantenimiento Industrial, Proyectos de Diseño, Fabricación, Adecuación e Innovación Tecnológica, con capacitación y Asesoramiento Ingenieril, brindando soluciones integrales de Ingeniería Eléctrica, sistemas Mecánicos, Hidráulicos, Neumáticos, Seguridad Industrial, Higiene y Medio Ambiente, empleando equipos de calidad y aplicando normativas vigentes, con profesionalismo para brindar un excelente servicio a nuestros clientes.
                                                 <br><br>
                                                 Nuestra Misión en TERAVOLT S.R.L. es ser un aliado estratégico, basados en relaciones de largo plazo con nuestros clientes, brindando un servicio de mantenimiento industrial estableciendo una mejora continua esto con el uso de tecnología de punta logrando satisfacer sus necesidades, con personal altamente calificado brindando así un servicio responsable, protegiendo el medio ambiente y apoyando mejoras en la comunidad.
                                             </p>
+                                            {% endif %}
+                                            
                                             
                                         </section>
                                     </div>
                                     <div class="col-6 col-12-small">
-                                        <section class="box">
-                                            <header>
+                                        <section class="box" style="background: transparent;">
+                                            <header style="z-index: 4; position: relative;">
                                                 <h3>VISIÓN</h3>
                                             </header>
-                                            <p>Ser la primera opción para nuestros clientes que requieren el servicio de diseño e instalación de sistemas eléctricos en su industria brindando soluciones integrales en tecnología con calidad, eficiencia y garantía.
-                                                <br><br>
 
+                                            {% if page.pMV2 %}
+                                                {{ page.pMV2|safe }}  <!-- Editable caption -->
+                                            {% else %}
+                                            <p style="z-index: 4; position: relative;">Ser la primera opción para nuestros clientes que requieren el servicio de diseño e instalación de sistemas eléctricos en su industria brindando soluciones integrales en tecnología con calidad, eficiencia y garantía.
+                                                <br><br>
                                                 Nuestra Visión es ser una empresa competente y reconocida dentro del ámbito nacional para ubicarnos en el grupo selecto de empresas que brindan calidad de servicios en mantenimiento industrial apoyando así la capacidad y experiencia de profesionales bolivianos.
                                                 .</p>
+                                            {% endif %}
+                                            
                                         </section>
                                     </div>
                                 </div>
                             </section>
-
                     </div>
                 </div>
             </div>
@@ -220,21 +307,33 @@
                             <header class="d-flex justify-content-center">
                                 <h2 class="text-start w-100">¿Quienes somos?</h2>
                             </header>
+
+                            {% if page.pQS %}
+                                <p>{{ page.pQS }}</p>  <!-- Editable caption -->
+                            {% else %}
                             <p>
                                 Somos una empresa especializada en la instalación de sistemas eléctricos en el sector industrial edificaciones y estructuras de ingeniería civil, automatización industrial y domótica, diseño, fabricación e instalación de tableros eléctricos, instalación de sistemas de seguridad y electrónica, cableado estructurado e instalación de redes de datos, diseño e instalación de sistemas de puesta a tierra y pararrayos, instalación y mantenimiento de maquinaria industrial. Contamos con el personal calificado e idóneo para la ejecución de los servicios, empleando las normativas vigentes nacionales e internacionales.
                             </p>
+                            {% endif %}
+                            
                         </section>
 
                         <section  class="py-5">
                             <header class="d-flex justify-content-center">
                                 <h2 class="text-start w-100">OBJETIVOS</h2>
                             </header>
+
+                            {% if self.caption %}
+                                <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                            {% else %}
                             <ul>
                                 <li>Implementar la mejora continua para el desarrollo de nuevos servicios sin comprometer la calidad.</li>
                                 <li>Mantener la rentabilidad mientras se optimiza la prestación de servicios.</li>
                                 <li>Mejorar la eficacia en los procesos operativos y administrativos.</li>
                                 <li>Maximizar la rentabilidad a través de una gestión eficiente.</li>
                             </ul>
+                            {% endif %}
+                            
                             
                         </section>
                     </div>

@@ -76,11 +76,22 @@ class CardBlock(StructBlock):
     'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
     'code', 'link', 'document-link', 'embed', 'image', 'table','color',
     ], required=True)
-
+    font_color = CharBlock(max_length=7, default="#000000")  # Default black
+    def save(self, *args, **kwargs):
+        # Modify the rich text content to inject the font_color
+        if self.font_color:
+            caption_html = self.title
+            # Inject the color as an inline style to all paragraphs, spans, or inline text
+            caption_html = re.sub(r'(<p[^>]*>|<span[^>]*>|<div[^>]*>)', 
+                                  r'\1<span style="color: ' + escape(self.font_color) + ';">', caption_html)
+            caption_html = re.sub(r'(</p>|</span>|</div>)', r'</span>\1', caption_html)
+            self.title = caption_html
+        super().save(*args, **kwargs)
     class Meta:
         template = "home/card_block.html"  # Create this template later
         icon = "placeholder"
         label = "Card"
+    
 
 class CardBlock2(StructBlock):
     """A reusable card block with image, title, description, and link."""
@@ -89,13 +100,22 @@ class CardBlock2(StructBlock):
     description = RichTextBlock(features=[
     'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',  
     'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
-    'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+    'code', 'link', 'document-link', 'embed', 'image', 'table','color','colorpicker'
     ], required=True)
-
+    font_color = CharBlock(max_length=7, default="#000000")  # Default black
     class Meta:
         template = "home/card_block2.html"  # Create this template later
         icon = "placeholder"
         label = "Card"
+    def save(self, *args, **kwargs):
+        # Modify the rich text content to inject the font_color
+        if self.font_color:
+            caption_html = self.title
+            # Inject the color as an inline style to all paragraphs, spans, or inline text
+            caption_html = re.sub(r'(<p[^>]*>|<span[^>]*>|<div[^>]*>)', 
+                                  r'\1<span style="color: ' + escape(self.font_color) + ';">', caption_html)
+            caption_html = re.sub(r'(</p>|</span>|</div>)', r'</span>\1', caption_html)
+            self.title = caption_html
 
 class CardBlock3(StructBlock):
     """A reusable card block with image, title, description, and link."""
@@ -106,44 +126,23 @@ class CardBlock3(StructBlock):
     'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',  
     'code', 'link', 'document-link', 'embed', 'image', 'table','color',
     ], required=True)
-
+    font_color = CharBlock(max_length=7, default="#000000")  # Default black
     class Meta:
         template = "home/card_block3.html"  # Create this template later
         icon = "placeholder"
         label = "Card"
+    def save(self, *args, **kwargs):
+        # Modify the rich text content to inject the font_color
+        if self.font_color:
+            caption_html = self.title
+            # Inject the color as an inline style to all paragraphs, spans, or inline text
+            caption_html = re.sub(r'(<p[^>]*>|<span[^>]*>|<div[^>]*>)', 
+                                  r'\1<span style="color: ' + escape(self.font_color) + ';">', caption_html)
+            caption_html = re.sub(r'(</p>|</span>|</div>)', r'</span>\1', caption_html)
+            self.title = caption_html
 
 class HomePage(Page):
-    heading = models.CharField(max_length=255, default="Soluciones integrales en tecnología")
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    image1 = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    image2 = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    image3 = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    background_color = models.CharField(max_length=7, default="#ffffff")
-    paragraph_text = RichTextField(
+    heading = RichTextField(
     default="Calidad y experiencia en servicios",
     features=[
         'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
@@ -152,10 +151,216 @@ class HomePage(Page):
         ],
         help_text="Edit this text from the Wagtail admin panel."
     )
+    banner = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+'
+    )
+    font_color = models.CharField(max_length=7, default="#000000")  # Default black
+    # font_color2 = models.CharField(max_length=7, default="#000000")  # Default black
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Logo Teravolt",
+        related_name='+'
+    )
+    image1 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Seccion 1",
+        related_name='+'
+    )
+    image2 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Seccion 2",
+        related_name='+'
+    )
+    image3 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Seccion 3",
+        related_name='+'
+    )
+    background_color = models.CharField(max_length=7, default="#ffffff")
+    background_color_ban = models.CharField(max_length=7, default="#ffffff")
 
     cards = StreamField([("card", CardBlock())], blank=True, use_json_field=True)
     cards2 = StreamField([("card", CardBlock2())], blank=True, use_json_field=True)
     cards3 = StreamField([("card", CardBlock3())], blank=True, use_json_field=True)
+
+    #Seccion 1
+    seccion1 = RichTextField(
+    default="ELECTROMECANICA",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    p1 = RichTextField(
+    default="ELECTROMECANICA",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+    bannerS1 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Division Seccion 1",
+        related_name='+'
+    )
+    background_color_s1 = models.CharField(max_length=7, default="#ffffff")
+    backS1 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="background Seccion 1",
+        related_name='+'
+    )
+    background_color_b1 = models.CharField(max_length=7, default="#ffffff")
+    #Seccion 2
+    seccion2 = RichTextField(
+    default="MANTENIMIENTO INDUSTRIAL",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    p2 = RichTextField(
+    default="MANTENIMIENTO INDUSTRIAL",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    bannerS2 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Division Seccion 2",
+        related_name='+'
+    )
+    background_color_s2 = models.CharField(max_length=7, default="#ffffff")
+    backS2 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="background Seccion 2",
+        related_name='+'
+    )
+    background_color_b2 = models.CharField(max_length=7, default="#ffffff")
+    #Seccion 3
+    seccion3 = RichTextField(
+    default="SISTEMAS DE SEGURIDAD",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    p3 = RichTextField(
+    default="SISTEMAS DE SEGURIDAD",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    bannerS3 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Division Seccion 3",
+        related_name='+'
+    )
+    background_color_s3 = models.CharField(max_length=7, default="#ffffff")
+    backS3 = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="background Seccion 3",
+        related_name='+'
+    )
+    background_color_b3 = models.CharField(max_length=7, default="#ffffff")
+    bannerMV = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Imagen Division Vision Mision",
+        related_name='+'
+    )
+    pMV1 = RichTextField(
+        default = "mision",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+    pMV2 = RichTextField(
+        default = "vision",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
+    pQS = RichTextField(
+        default = "Quienes somos",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+    pOB = RichTextField(
+        default = "objetivos",
+    features=[
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+        'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'hr', 'blockquote',
+        'code', 'link', 'document-link', 'embed', 'image', 'table','color',
+        ],
+        help_text="Edit this text from the Wagtail admin panel."
+    )
+
 
     facebook_url = models.URLField(blank=True, help_text="Enlace a tu página de Facebook")
     whatsapp_number = models.URLField(blank=True, help_text="Número de WhatsApp con código de país")
@@ -172,15 +377,42 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("heading"),
         FieldPanel("image"),
+        FieldPanel("banner"),
+        # NativeColorPanel("font_color2"),
+        NativeColorPanel("background_color_ban"),
         NativeColorPanel("background_color"),
-        FieldPanel("paragraph_text"),
         InlinePanel("carousel_images", label="Imágenes del Carrusel"),  # 📌 Agregamos el InlinePanel para el carrusel
         FieldPanel("image1"),
         FieldPanel("image2"),
         FieldPanel("image3"),
+        
+        FieldPanel("seccion1"),
+        FieldPanel("p1"),
+        FieldPanel("bannerS1"),
+        FieldPanel("background_color_s1"),
+        FieldPanel("backS1"),
+        FieldPanel("background_color_b1"),
+        FieldPanel("seccion2"),
+        FieldPanel("p2"),
+        FieldPanel("bannerS2"),
+        FieldPanel("background_color_s2"),
+        FieldPanel("backS2"),
+        FieldPanel("background_color_b2"),
+        FieldPanel("seccion3"),
+        FieldPanel("p3"),
+        FieldPanel("bannerS3"),
+        FieldPanel("background_color_s3"),
+        FieldPanel("backS3"),
+        FieldPanel("background_color_b3"),
+        NativeColorPanel("font_color"),
         FieldPanel("cards"),
         FieldPanel("cards2"),
         FieldPanel("cards3"),
+        FieldPanel("bannerMV"),
+        FieldPanel("pMV1"),
+        FieldPanel("pMV2"),
+        FieldPanel("pQS"),
+        FieldPanel("pOB"),
         FieldPanel("facebook_url"),
         FieldPanel("whatsapp_number"),
         FieldPanel("linkedin_url"),
@@ -214,15 +446,3 @@ class HomePage(Page):
                 "form": form,
                 "page": self,
             })
-    # def serve(self, request):
-    #     form = ContactForm(request.POST or None)
-        
-    #     if request.method == "POST" and form.is_valid():
-    #         form.send_email()
-    #         return render(request, "home/home_page.html", {
-    #             "form": ContactForm(),  # Vacía el formulario después de enviar
-    #             "success": True,
-    #             "page": self,
-    #         })
-
-    #     return render(request, "home/home_page.html", {"form": form, "page": self})

@@ -28,7 +28,7 @@ html {
 }
 
 html, body, div, span, applet, object,
-iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+iframe, h1, h2, h3, h4, h5, h6, p, b, blockquote,
 pre, a, abbr, acronym, address, big, cite,
 code, del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b,
@@ -70,6 +70,11 @@ section, summary, time, mark, audio, video {
 		font-family: var(--font-body);
 		font-size: 1rem;
 		color: var(--color-secondary-dark);
+	}
+	b {
+		font-family: var(--font-header);
+		font-weight: var(--heading-font-weight);
+		color: var(--color-primary);
 	}
 
 article, aside, details, figcaption, figure,
@@ -297,6 +302,224 @@ input, select, textarea {
 }
 
 
+/* Section Styles */
+section#ELECTROMECANICA {
+	position: relative;
+	width: 100vw;
+}
+section#Mantenimiento {
+	position: relative;
+	width: 100vw;
+}
+section#seguridad {
+	position: relative;
+	width: 100vw;
+}
+/* Overlay Styles */
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;  /* 50% opacity */
+	z-index: 1;  /* Places the overlay in front of the image */
+}
+
+/* Ensure content is above the overlay */
+section#ELECTROMECANICA > header,
+section#ELECTROMECANICA > .row {
+	position: relative;
+	z-index: 2;  /* Ensures text and content are above the overlay */
+}
+/* Ensure content is above the overlay */
+section#seguridad > header,
+section#seguridad > .row {
+	position: relative;
+	z-index: 2;  /* Ensures text and content are above the overlay */
+}
+/* Ensure content is above the overlay */
+section#Mantenimiento > header,
+section#Mantenimiento > .row {
+	position: relative;
+	z-index: 2;  /* Ensures text and content are above the overlay */
+}
+
+
+.image-container {
+	width: 100%;
+	max-width: 450px; /* Ajusta según sea necesario */
+	height: 260px; /* Tamaño fijo del contenedor */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden; /* Recorta cualquier parte de la imagen que sobresalga */
+	padding-bottom: 1em;
+}
+
+.image-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Llena el contenedor recortando si es necesario */
+	display: block;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+	.image-container {
+		height: 200px;
+	}
+}
+
+@media (max-width: 480px) {
+	.image-container {
+		height: 150px;
+	}
+}
+
+.banner {
+	position: relative; /* Set the banner to relative position */
+    width: 100%;
+    height: 6rem; /* Ensure the banner covers the full height of the parent */
+    display: flex; /* Enable flexbox to center content */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+	z-index: 2; /* Ensures the caption is above the overlay and image */
+}
+
+.caption h2 {
+	position: relative; /* Make sure the z-index works */
+	font-size: 2rem; /* Adjust font size */
+	color: white; /* White text for visibility */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional text shadow for better readability */
+	z-index: 4;
+	margin: 0; /* Remove any default margin */
+}
+
+.overlay2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;  /* 50% opacity */
+	z-index: 3; /* Ensures overlay is behind the caption */
+}
+
+ /* Media Queries for Responsiveness */
+ @media (max-width: 1200px) {
+	.caption h2 {
+		font-size: 2.5rem; /* Slightly smaller font for larger screens */
+
+		z-index: 4;
+	}
+}
+
+@media (max-width: 992px) {
+	.caption h2 {
+		font-size: 2rem; /* Smaller font for tablets */
+		z-index: 4;
+	}
+
+	.banner {
+		top: 0%; /* Adjust the position for better alignment on tablets */
+	}
+}
+
+@media (max-width: 768px) {
+	.caption h2 {
+		font-size: 1.8rem; /* Smaller font for smaller devices */
+	}
+
+	.banner {
+		top: 0%; /* Adjust the position for smaller screens */
+	}
+}
+
+@media (max-width: 480px) {
+	.caption h2 {
+		font-size: 1.5rem; /* Further reduce font size for very small screens */
+	}
+
+	.banner {
+		top: 0%; /* Adjust the position for very small screens */
+	}
+}
+
+
+/* Banner principal */
+
+
+.bannerp {
+	position: relative; /* Set the banner to relative position */
+    width: 100%;
+    height: 12rem; /* Ensure the banner covers the full height of the parent */
+    display: flex; /* Enable flexbox to center content */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+	z-index: 2; /* Ensures the caption is above the overlay and image */
+}
+
+.caption h2 {
+	position: relative; /* Make sure the z-index works */
+	font-size: 2rem; /* Adjust font size */
+	color: white; /* White text for visibility */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional text shadow for better readability */
+	z-index: 4;
+	margin: 0; /* Remove any default margin */
+}
+
+.overlay2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;  /* 50% opacity */
+	z-index: 3; /* Ensures overlay is behind the caption */
+}
+
+ /* Media Queries for Responsiveness */
+ @media (max-width: 1200px) {
+	.caption h2 {
+		font-size: 2.5rem; /* Slightly smaller font for larger screens */
+
+		z-index: 4;
+	}
+}
+
+@media (max-width: 992px) {
+	.caption h2 {
+		font-size: 2rem; /* Smaller font for tablets */
+		z-index: 4;
+	}
+
+	.bannerp {
+		top: 0%; /* Adjust the position for better alignment on tablets */
+	}
+}
+
+@media (max-width: 768px) {
+	.caption h2 {
+		font-size: 1.8rem; /* Smaller font for smaller devices */
+	}
+
+	.bannerp {
+		top: 0%; /* Adjust the position for smaller screens */
+	}
+}
+
+@media (max-width: 480px) {
+	.caption h2 {
+		font-size: 1.5rem; /* Further reduce font size for very small screens */
+	}
+
+	.bannerp {
+		top: 0%; /* Adjust the position for very small screens */
+	}
+}
+
+
 /* Responsive image */
 
 .responsive-image {
@@ -329,7 +552,7 @@ input, select, textarea {
 	.container {
 		margin: 0 auto;
 		max-width: 100%;
-		width: 70em;
+		width: 100%;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -1720,13 +1943,13 @@ input, select, textarea {
 
 	.box {
 		background: #ffffff;
-		border-bottom: solid 1px #ccc;
 		padding: 2.75em 1.75em 2.75em 1.75em;
 	}
 
 		.box .image.featured {
 			position: relative;
-			width: auto;
+			width: 100%;
+			height: 100%;
 			left: 1.75em;
 			top: 1.75em;
 			margin: -4.5em 0 4.25em -3.5em;
@@ -2330,8 +2553,8 @@ input, select, textarea {
 		background-repeat: no-repeat;
 		text-align: center;
 		position: relative;
-		padding: 8em 0;
-		margin: 4em 0 0 0;
+		padding: 0 0;
+		margin: 0 0 0 0;
 	}
 
 		#banner header {
@@ -2418,7 +2641,7 @@ input, select, textarea {
 	#main {
 		position: relative;
 		background: #ffffff;
-		padding: 4em 0 4em 0;
+		padding: 0em 0 0em 0;
 	}
 
 		#main:before {
@@ -2571,7 +2794,7 @@ input, select, textarea {
 		/* Main */
 
 			#main {
-				padding: 30px 0;
+				padding: 0px 0;
 			}
 
 		/* Footer */
@@ -2678,7 +2901,7 @@ input, select, textarea {
 		/* Main */
 
 			#main {
-				padding: 40px 0;
+				padding: 0px 0;
 			}
 
 		/* Copyright */
@@ -2899,7 +3122,7 @@ input, select, textarea {
 		/* Section/Article */
 
 			section, article {
-				margin-bottom: 20px;
+				margin-bottom: 0;
 			}
 
 			header {
@@ -3050,7 +3273,7 @@ input, select, textarea {
 		/* Main */
 
 			#main {
-				padding: 20px 0;
+				padding: 0px 0;
 			}
 
 		/* Footer */

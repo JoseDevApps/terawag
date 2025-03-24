@@ -32,3 +32,4 @@ def register_font_color_feature(features):
     features.register_converter_rule('contentstate', feature_name, db_conversion)
 
     features.default_features.append('font_color')
+

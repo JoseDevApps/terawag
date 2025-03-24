@@ -1,20 +1,20 @@
 {% load wagtailimages_tags %}
 {% load wagtailcore_tags %}
 {% load static %}
-<div class="col card-item mb-4" data-aos="fade-up">
-    <section class="box">
-        <div class="">
-            {% if self.imagex %}
+    <div class=" col card-item mb-4 {% if page.cards2|length != 1 %} col-4 col-6-medium col-12-small {% endif %}" data-aos="fade-up" style="padding: 2em 0 0 2em; background: transparent;">
+        <section class="box" style="background: transparent;">
+            <div class=" {% if page.cards2|length != 1 %} image-container {% endif %}">
+                {% if self.imagex %}
                 <a href="{{ self.link|default:'#' }}" class="image featured">
                     <img src= "{{ self.imagex.file.url }}" >
                 </a>
-            {% else %}
+                {% else %}
                 <p>No image available</p>  <!-- Optional message for missing image -->
-            {% endif %}
-        </div>
-        <header>
-            <h3>{{ self.title }}</h3>
-        </header>
-        <p>{{ self.description|richtext  }}</p>
-    </section>
-</div>
+                {% endif %}
+            </div>
+            <header style="padding-top: 1em;">
+                <h3>{{ self.title }}</h3>
+            </header>
+            <p>{{ self.description|richtext  }}</p>
+        </section>
+    </div>
