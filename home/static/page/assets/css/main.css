@@ -548,6 +548,46 @@ section#Mantenimiento > .row {
 	}
 }
 
+/* Logo slider container */
+.logo-slider {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    padding: 20px 0;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Logo track to move images */
+.logo-track {
+    display: flex;
+    animation: slideRightToLeft 18s linear infinite;
+}
+
+/* Logo items */
+.logo {
+    flex: 0 0 auto;
+    width: 150px;
+    margin: 0 20px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    transition: filter 0.8s ease-in-out;
+}
+
+.logo img:hover {
+    filter: grayscale(0%); /* Color on hover */
+}
+
+/* Animation: Start from the right side */
+@keyframes slideRightToLeft {
+    0% { transform: translateX(100%); }  /* Start off-screen to the right */
+    100% { transform: translateX(-50%); } /* Moves half of the duplicated content */
+}
+
+
 
 /* Responsive image */
 

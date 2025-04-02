@@ -17,7 +17,6 @@
     <!-- Header -->
         <section id="header ">
             <!-- Logo -->
-             <div class="background-logo" style="background-color:{{ page.background_color }};">
                 <div class="bd-example">
                     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                       
@@ -43,7 +42,7 @@
                             {% if item.caption %}
                               <div class="carousel-caption d-none d-md-block">
                                 <div style="color: {{ item.font_color }}">
-                                    {{ item.caption|richtext }}
+                                    {{ item.caption|safe }}
                                 </div>
                               </div>
                             {% endif %}
@@ -61,62 +60,34 @@
                         <span class="sr-only">Next</span>
                       </a>
                     </div>
-                  </div>
+                </div>
                   
                   
 
-             </div>
 
             <!-- Intro -->
                 <section id="intro" class="container">
                     
-                 
-
-
                     <div class="row ">
+                        {% for seccion in page.sectionsG.all %}
                         <div class="col-4 col-12-medium">
                             <section class="first">
-                                {% if page.image1 %}
-                                {% image page.image1 fill-640x368 class="responsive-image scroll-image" data-target="#ELECTROMECANICA" %}
+                                
+                                {% if seccion.image %}
+                                <div class="scroll-image" data-target="#{{ seccion.id }}">
+                                    {% image seccion.image fill-640x368 class="responsive-image scroll-image" %}
+                                </div>
                                 {% else %}
                                     <img src="{% static 'page/images/fig2.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#ELECTROMECANICA">
                                 {% endif %} 
                                 <br>
                                 <header>
-                                    <h2>{{ page.seccion1|richtext }}</h2>
+                                    <h2>{{ seccion.title|safe }}</h2>
                                 </header>
-                                <p>{{ page.p1|richtext }}</p>
+                                <p>{{ seccion.caption|safe }}</p>
                             </section>
                         </div>
-                        <div class="col-4 col-12-medium">
-                            <section class="middle">
-                                {% if page.image2 %}
-                                {% image page.image2 fill-640x368 class="responsive-image scroll-image" data-target="#Mantenimiento" %}
-                                {% else %}
-                                    <img src="{% static 'page/images/fig22.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#Mantenimiento">
-                                {% endif %} 
-
-                                <br>
-                                <header>
-                                    <h2>{{ page.seccion2|richtext }}</h2>
-                                </header>
-                                <p>{{ page.p2|richtext }}</p>
-                            </section>
-                        </div>
-                        <div class="col-4 col-12-medium">
-                            <section class="last">
-                                {% if page.image3 %}
-                                {% image page.image3 fill-640x368 class="responsive-image scroll-image" data-target="#seguridad" %}
-                                {% else %}
-                                    <img src="{% static 'page/images/fig3.jpg' %}" alt="Responsive Image" class="responsive-image scroll-image" data-target="#seguridad">
-                                {% endif %} 
-                                <br>
-                                <header>
-                                    <h2>{{ page.seccion3|richtext }}</h2>
-                                </header>
-                                <p>{{ page.p3|richtext }} </p>
-                            </section>
-                        </div>
+                        {% endfor %}
                     </div>
 
                 </section>
@@ -140,127 +111,126 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <!-- Portfolio -->
-                        <section id="ELECTROMECANICA" 
-                        style="background-image: url({{ page.bannerS1.file.url }}); 
+                        {% for section in page.sectionsG.all %}
+
+                        <section class="Oversection" id="{{ section.id }}" 
+                        style="background-image: url({{ section.backcontent.file.url }}); 
                                width: 100vw; 
                                position: relative; 
                                transform: translateX(-50%); 
                                left: 50%;">
                             <!-- Background overlay -->
-                            <div class="overlay" style="background-color: {{ page.background_color_s1 }}; "></div>
+                            <div class="overlay" style="background-color: {{ section.backcontent_color }}; "></div>
                             
-                            <div class="banner" style="background-image: url({{ page.backS1.file.url }});  ">
-                                <div class="overlay2" style="background-color: {{ page.background_color_b1 }}; "></div>
+                            <div class="banner" style="background-image: url({{ section.backimg.file.url }});  ">
+                                <div class="overlay2" style="background-color: {{ section.backcolor }}; "></div>
                                 <div class="caption">
-                                    {% if self.caption %}
-                                        <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                    {% if section.title %}
+                                        <h2>{{ section.title|safe }}</h2>  <!-- Editable caption -->
                                     {% else %}
                                         <h2>ELECTROMECÁNICA</h2>  <!-- Default caption if not set -->
                                     {% endif %}
                                 </div>
                             </div>
-                            {% with page.cards|length as num_cards %}
                             <div class="row justify-content-center" style="padding-left: 4em; padding-right: 4em;">
-                                {% for card in page.cards %}
-                                    {% include_block card %}
+                                {% for card in section.cardsgeneral.all %}
+                                    <div class=" col card-item mb-4 {% if section.cardsgeneral.all|length != 1 %} col-4 col-6-medium col-12-small {% endif %}" data-aos="fade-up" style="padding: 2em 0 0 2em; background: transparent;">
+                                        <section class="box" style="background: transparent;">
+                                            <div class=" {% if section.cardsgeneral.all|length != 1 %} image-container {% endif %}">
+                                                {% if card.image %}
+                                                <a href="{{ self.link|default:'#' }}" class="image featured">
+                                                    <img src= "{{ card.image.file.url }}" >
+                                                </a>
+                                                {% else %}
+                                                <p>No image available</p>  <!-- Optional message for missing image -->
+                                                {% endif %}
+                                            </div>
+                                            <header>
+                                                <!-- <h2 style="color: {{ self.font_color }};">{{ self.title|safe }}</h2> -->
+                                                <div style="color: {{ card.font_color2 }};">
+                                                    {% autoescape off %}
+                                                    {{ card.title|safe }}
+                                                    {% endautoescape %}
+                                                </div>
+                                            </header>
+                                            <p>{{ card.description|safe  }}</p>
+                                        </section>
+                                    </div>
                                 {% endfor %}
                             </div>
-                            {% endwith %}
+                        
                         </section>
 
-                            <!-- Seccion 2 -->
+                        {% endfor %}
 
-                            <section id="Mantenimiento" style="background-image: url({{ page.bannerS2.file.url }}); 
-                                        width: 100vw; 
-                                        position: relative; 
-                                        transform: translateX(-50%); 
-                                        left: 50%;">
-                                <div class="overlay" style="background-color: {{ page.background_color_s2 }}; "></div>
 
-                                <div class="banner" style="background-image: url({{ page.backS2.file.url }});  ">
-                                    <div class="overlay2" style="background-color: {{ page.background_color_b2 }}; "></div>
-                                    <div class="caption">
-                                        {% if self.caption %}
-                                            <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
-                                        {% else %}
-                                            <h2>MANTENIMIENTO INDUSTRIAL</h2>  <!-- Default caption if not set -->
-                                        {% endif %}
-                                    </div>
-                                </div>
+                            <!-- Clientes  -->
 
-                            
-                            
-                                <div class="row justify-content-center" style="padding-left: 4em; padding-right: 4em;">
-                                    {% for card in page.cards2 %}
-                                        {% include_block card %}
-                                    {% endfor %}
-                                </div>
-                                
-                            </section>
-
-                            <!-- Seccion 3 -->
-
-                            <section id="seguridad" style="background-image: url({{ page.bannerS3.file.url }}); 
+                            <section id="clientes" style="background-image: url({{ page.bannerSC.file.url }}); 
                                     width: 100vw; 
                                     position: relative; 
                                     transform: translateX(-50%); 
                                     left: 50%;">
-                                <div class="overlay" style="background-color: {{ page.background_color_s3 }}; "></div>
+                                <div class="overlay" style="background-color: {{ page.background_color_sC }}; "></div>
 
-                                <div class="banner" style="background-image: url({{ page.backS3.file.url }}); ">
-                                    <div class="overlay2" style="background-color: {{ page.background_color_b3 }}; "></div>
+                                <div class="banner" style="background-image: url({{ page.backSC.file.url }}); ">
+                                    <div class="overlay2" style="background-color: {{ page.background_color_bC }}; "></div>
                                     <div class="caption">
-                                        {% if self.caption %}
-                                            <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
+                                        {% if page.seccionCliente %}
+                                            <h2>{{ page.seccionCliente|safe }}</h2>  <!-- Editable caption -->
                                         {% else %}
-                                            <h2>SISTEMAS DE SEGURIDAD</h2>  <!-- Default caption if not set -->
+                                            <h2>Clientes </h2>  <!-- Default caption if not set -->
                                         {% endif %}
                                     </div>
                                 </div>
 
-                             
-                                <div class="row justify-content-cente" style="padding-left: 4em; padding-right: 4em;">
-                                   
-                                    {% for card in page.cards3 %}
-                                        {% include_block card %}
-                                    {% endfor %}
+                                
+                                <div class="logo-slider">
+                                    <div class="logo-track">
+
+                                        {% for item in page.carousel_clients.all %}
+                                        <div class="logo"><img src= {{ item.image.file.url }} alt="{{ item.image}}"></div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
+
                             </section>
 
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" style="padding-top: 0;">
                         <!-- Blog -->
                             <section style="background-image: url({{ page.bannerMV.file.url }});
                             width: 100vw; 
                             position: relative; 
                             transform: translateX(-50%); 
+                            z-index: 0;
                             left: 50%;">
-                            <div class="overlay" style="background-color: #31866a; "></div>
-
-                        
+                            <div class="overlay" style="background-color: {{ page.bannerMV_color }};"></div>
                             
-                                <div class="row">
-                                    <div class="banner" style="background-image: url({% static 'page/images/pic02.jpg' %}); ">
-                                        <div class="overlay2" style="background-color: #ffffff; "></div>
-                                        <div class="caption">
-                                            {% if self.caption %}
-                                                <h2>{{ self.caption }}</h2>  <!-- Editable caption -->
-                                            {% else %}
-                                                <h2>Misión y Visión</h2>  <!-- Default caption if not set -->
-                                            {% endif %}
-                                        </div>
-                                    </div>
-
+                            <div class="banner" style="background-image: url({{ page.bannerMsec.file.url }}); ">
+                                <div class="overlay2" style="background-color: {{ page.MV_colorback }}; "></div>
+                                <div class="caption">
+                                    {% if page.pMVT %}
+                                    <h2>{{ page.pMVT|safe }}</h2>  <!-- Editable caption -->
+                                    {% else %}
+                                    <h2>Misión y Visión</h2>  <!-- Default caption if not set -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="padding: 0;">
                                     <div class="col-6 col-12-small">
-                                        <section class="box" style="background: transparent;">
+                                        <section class="box" style="background: transparent; padding-left: 3em; padding-right: 2em;">
                                             <header style="z-index: 4; position: relative;">
                                                 <h3>MISIÓN</h3>
                                             </header>
 
-                                            {% if page.pMV1 %}
+                                            {% if page.pMV1|safe %}
+                                            <span >
                                                 {{ page.pMV1|safe }}  <!-- Editable caption -->
+                                            </span>
+                                            
                                             {% else %}
                                             <p style="z-index: 4; position: relative;">
                                                 Somos una empresa especializada en el sector de Automatización y Mantenimiento Industrial, Proyectos de Diseño, Fabricación, Adecuación e Innovación Tecnológica, con capacitación y Asesoramiento Ingenieril, brindando soluciones integrales de Ingeniería Eléctrica, sistemas Mecánicos, Hidráulicos, Neumáticos, Seguridad Industrial, Higiene y Medio Ambiente, empleando equipos de calidad y aplicando normativas vigentes, con profesionalismo para brindar un excelente servicio a nuestros clientes.
@@ -273,7 +243,7 @@
                                         </section>
                                     </div>
                                     <div class="col-6 col-12-small">
-                                        <section class="box" style="background: transparent;">
+                                        <section class="box" style="background: transparent;  padding-left: 3em; margin-right: 2em;">
                                             <header style="z-index: 4; position: relative;">
                                                 <h3>VISIÓN</h3>
                                             </header>
@@ -291,6 +261,8 @@
                                     </div>
                                 </div>
                             </section>
+
+
                     </div>
                 </div>
             </div>
@@ -370,6 +342,11 @@
                                     <div class="field half">
                                         <label for="id_name">Nombre</label>
                                         {{ form.name }}
+                                    </div>
+                                    <br>
+                                    <div class="field half">
+                                        <label for="id_email">Telefono</label>
+                                        {{ form.email }}
                                     </div>
                                     <br>
                                     <div class="field half">
@@ -499,7 +476,7 @@
 			<script>
 				document.addEventListener("DOMContentLoaded", function () {
 				const pageimages = document.querySelectorAll(".scroll-image");
-
+                console.log(pageimages)
 				pageimages.forEach(function (image) {
 					image.addEventListener("click", function () {
 					const targetSection = document.querySelector(image.getAttribute("data-target"));
